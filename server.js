@@ -6,19 +6,19 @@
 /// Config Area ///
 
 var enableWhitelist = true; // Enable the Whitelist/Allowlist
-var guildId = "DISCORD_GUILD_ID"; // Guild ID for a Discord Server, see https://faxes.zone/i/zjKnd.png
-var botToken = "DISCORD_BOT_TOKEN"; // This must be a Discord bot token, create a bot @ https://discord.com/developers/applications
+var guildId = "Discord_TOKEN_ID"; // Guild ID for a Discord Server, see https://faxes.zone/i/zjKnd.png
+var botToken = "Bot_ID.G58nhl.7Zuq0ew5CMfAmyxidU5B_Jq_MqEylEuMzJFeqg"; // This must be a Discord bot token, create a bot @ https://discord.com/developers/applications
 
 var whitelistRoles = [ // Roles by ID that are whitelisted.
-    "ROLE_ID"
+    "Role_ID"
 ];
 var blacklistRoles = [ // Roles by Id that are blacklisted.
-    "ROLE_ID"
+    "Role_ID"
 ];
 
-var notWhitelistedMessage = "You're Not Whitelisted. This sever is whitelisted and requires access to join.";
-var noGuildMessage = "Guild Not Detected. It seems you're not in the guild for this community.";
-var blacklistMessage = "You're blacklisted from this server.";
+var notWhitelistedMessage = "Vous n'êtes pas Whitelist.";
+var noGuildMessage = "Discord non détecté. Il semble que vous ne soyez pas dans le Discord du serveur !";
+var blacklistMessage = "Vous êtes blacklist de ce serveur..";
 var debugMode = false; // 
 var cacheMaxTime = "1h"; // This is the time it takes for refreshes (cache) to have to reload when fetching Discord roles.
 
@@ -127,7 +127,7 @@ on('playerConnecting', async (name, setKickReason, deferrals) => {
     let src = global.source;
     deferrals.defer();
     setTimeout(() => {
-        deferrals.update(`Hello ${name}. Your Discord ID is being checked with our whitelist.`)
+        deferrals.update(`Bonjour ${name}, nous vérifions si vous faites partie du discord ...`)
         setTimeout(async function() {
             getUserDiscord(src, async function(userId) {
                 if(userId) {
@@ -158,7 +158,7 @@ on('playerConnecting', async (name, setKickReason, deferrals) => {
                             if(!resDis) {
                                 cache[userId] = {passed: 0,roles: null,timeAt: Date.now() + ms(cacheMaxTime)}
                                 if(debugMode) console.log(`[${version}] ^5Error in Discord call. Maybe consider extending the 'cacheMaxTime' option.^7`)
-                                return deferrals.done('There was an error checking your Discord Id. Please contact the server owner.');
+                                return deferrals.done('Il y a eu une erreur lors de la vérification Discord. Veuillez contacter le propriétaire du serveur.');
                             }
                             if(!resDis.data) {
                                 cache[userId] = {passed: 0,roles: null,timeAt: Date.now() + ms(cacheMaxTime)}
